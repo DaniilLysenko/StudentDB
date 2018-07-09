@@ -48,4 +48,14 @@
 			}
 			return false;			
 		}
+
+		public function removeTeacherComms($id) {
+			if (intval($id)) {
+				$db = Db::getConnection();
+				$sql = $db->prepare("DELETE FROM `student_teacher` WHERE `teacher_id` = :id");
+				$sql->execute(['id' => $id]);
+				return true;
+			}	
+			return false;
+		}
 	}

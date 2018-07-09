@@ -10,10 +10,11 @@
 		echo json_encode(["teachers" => $teachers, "allTeachers" => $allTeachers]);
 	}
 
-	// remove student teacher by id
+	// remove teacher by id
 
 	if (isset($_POST['tid']) && isset($_POST['sid']) && isset($_POST['type']) && $_POST['type'] == 'removeTeacher') {
 		$teachers = $teacher->killTeacher(intval($_POST['tid']), intval($_POST['sid']));
+		$teacher->removeTeacherComms($_POST['tid']);
 		echo "OK";
 	}
 

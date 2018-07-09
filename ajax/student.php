@@ -15,6 +15,7 @@
 
 	if (isset($_POST['id']) && isset($_POST['type']) && $_POST['type'] == 'removeStudent') {
 		$student = $st->removeStudent(intval($_POST['id']));
+		$st->removeStudentComms($_POST['id']);
 		echo "OK";
 		return true;
 	}

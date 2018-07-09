@@ -101,4 +101,14 @@
 			$sql->execute(['name' => $name, 'age' => $age, 'sex' => $sex, 'phone' => $phone, 'birthday' => $birthday, 'id' => $id]);
 			return true;
 		}
+
+		public function removeStudentComms($id) {
+			if (intval($id)) {
+				$db = Db::getConnection();
+				$sql = $db->prepare("DELETE FROM `student_teacher` WHERE `student_id` = :id");
+				$sql->execute(['id' => $id]);
+				return true;
+			}	
+			return false;
+		}
 	}
