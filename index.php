@@ -8,11 +8,6 @@
 	$pages = $st->getUserPageCount();
 	$current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 	$students = $st->getAllStudents($current_page);
-
-	// Pagination
-	if (isset($_POST['search'])) {
-		$search_st = $st->findStudent($_POST['query']);
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
