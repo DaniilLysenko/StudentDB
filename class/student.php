@@ -83,12 +83,15 @@
 		}
 
 		public function findStudent($query)
-		{
-			$query = "%$query%";
-			$db = Db::getConnection();
-			$sql = $db->prepare("SELECT * FROM `student` WHERE `name` LIKE :name");
-			$sql->execute(['name' => $query]);
-			return $sql->fetchAll();
+		{	
+			if ($query !== "") {
+				$query = "%$query%";
+				$db = Db::getConnection();
+				$sql = $db->prepare("SELECT * FROM `student` WHERE `name` LIKE :name");
+				$sql->execute(['name' => $query]);
+				return $sql->fetchAll();
+			} 
+			return [];
 		}
 
 		public function updateUserInfo($name, $age, $sex, $phone, $birthday, $id)

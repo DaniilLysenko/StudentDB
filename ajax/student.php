@@ -27,6 +27,14 @@
 		return true;
 	}
 
+	// search student by name
+
+	if (isset($_POST['q']) && isset($_POST['type']) && $_POST['type'] == 'searchStudent') {
+		$result = $st->findStudent($_POST['q']);
+		echo json_encode(["result" => $result]);
+		return true;
+	}
+
 	// add new student
 
 	if (isset($_POST['name']) && isset($_POST['age']) && isset($_POST['sex']) && isset($_POST['phone']) && 	isset($_POST['birthday']) && isset($_POST['type']) && $_POST['type'] == 'addStudent') {

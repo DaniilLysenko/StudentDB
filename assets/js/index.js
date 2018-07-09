@@ -36,7 +36,7 @@ $('#add_student').on('submit', (e) => {
 	})
 });
 
-$('.openPage').on('click', function() {
+$('.table').on('click', '.openPage', function() {
 	let id = $(this).attr('data-id');
 	$.ajax({
 		url: '/ajax/student.php',
@@ -80,7 +80,7 @@ $('.removeStudent').on('click', function() {
 	});
 });
 
-$('.openTeachers').on('click', function() {
+$('.table').on('click', '.openTeachers', function() {
 	let id = $(this).attr('data-id');
 	$.ajax({
 		url: '/ajax/teacher.php',
@@ -178,7 +178,7 @@ $('#teachersModal').on('submit', '#addTeacher', (e) => {
 	});
 });
 
-$('.editInfo').on('click', function() {
+$('.table').on('click', '.editInfo', function() {
 	$('#editModal .modal-title').text('Edit ' + $(this).attr('data-name') + ' info');
 	$('#uploadImage #sid').val($(this).attr('data-id'));
 	$('#editModal').modal();
@@ -206,6 +206,45 @@ $('#editModal').on('submit', '#uploadImage', (e) => {
     			showDangerAlert("You have an error. Try adain!");
     		}
     	}
+	});
+});
+
+$('#searchStudent #query').on('keyup', (e) => {
+	let q = $('#searchStudent #query').val();
+	if (q === "") $('.search-table').hide(); 
+	$.ajax({
+		url: '/ajax/student.php',
+		type: 'POST',
+		data: {q, type: 'searchStudent'},
+		success: (response) => {
+			response = JSON.parse(response);
+			$('.search-table tbody').empty();
+			response['result'].forEach(student => {
+				$('.search-table tbody').append(`
+				<tr class="st_col${student.id}">
+					<td>${student.name}</td>
+					<td>${student.age}</td>
+					<td>${student.sex}</td>
+					<td>
+						<button class="btn btn-danger removeStudent" type="button" data-id="${student.id}">Delete</button>
+					</td>
+					<td>
+						<button class="btn btn-warning editInfo" data-toggle="modal" data-id="${student.id}" data-name="${student.name}">Edit</button>
+					</td>
+					<td>
+						<button class="btn btn-primary openPage" data-id="${student.id}">Page</button>
+					</td>
+					<td>
+						<button class="btn btn-success openTeachers" data-id="${student.id}">Teachers</button>
+					</td>
+				</tr>
+				`);	
+			});
+			if (response['result'].length > 0) $('.search-table').show();
+		},
+		error: (error) => {
+			console.log(error);
+		}
 	});
 });
 

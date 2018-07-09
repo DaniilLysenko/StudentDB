@@ -78,44 +78,23 @@
 				</ul>
 				</nav>
 		        <br><hr>
-		        <form method="POST" action="/">
+		        <form id="searchStudent">
 		          <div class="form-group">
 		          	<h2>Search</h2>
-		            <input type="text" class="form-control" name="query" placeholder="Text student name" autocomplete="off"><br>
-		            <button class="btn btn-primary" type="submit" name="search">Find</button>
+		            <input type="text" class="form-control" id="query" placeholder="Text student name" autocomplete="off"><br>
 		          </div>
 		        </form>
-		        <?php if (count($search_st) > 0): ?>
-		        <table class="table">
-		        	<thead>
-						<th scope="col">Name</th>
-						<th scope="col">Phone</th>
-						<th scope="col">Age</th>
-						<th scope="col">Sex</th>
-						<th scope="col">Birthday</th>
-						<th scope="col">Delete</th>
-						<th scope="col">Page</th>
-		        	</thead>
-		        	<tbody>
-		        		<?php for ($i = 0; $i < count($search_st); $i++): ?>
-		        		<tr>
-		        			<td><?php echo $search_st[$i]["name"]; ?></td>
-		        			<td><?php echo $search_st[$i]["phone"]; ?></td>
-		        			<td><?php echo $search_st[$i]["age"]; ?></td>
-		        			<td><?php echo $search_st[$i]["sex"]; ?></td>
-		        			<td><?php echo $search_st[$i]["birthday"]; ?></td>
-		        			<td>
-		        				<form action="index.php" method="POST">
-									<input type="hidden" name="st_id" value="<?php echo $search_st[$i]["id"]; ?>">
-									<button type="submit" class="btn btn-danger" name="remove">Delete</button>
-								</form>
-		        			</td>
-		        			<td><a href="/student.php?id=<?php echo $search_st[$i]["id"]; ?>">Page</a></td>
-		        		</tr>
-		        	<?php endfor; ?>
-		        	</tbody>
+		        <table class="table search-table">
+				    <tr>
+				      <th scope="col">Name</th>
+				      <th scope="col">Age</th>
+				      <th scope="col">Sex</th>
+				      <th scope="col">Delete</th>
+				      <th scope="col">Edit</th>
+				      <th scope="col">Page</th>
+				      <th scope="col">Teachers</th>
+				    </tr>
 		        </table>
-		    	<?php endif; ?>
 			</div>
 			<div class="col-sm-4">
 				<div class="card" style="width: 18rem;">
